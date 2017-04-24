@@ -1,0 +1,22 @@
+﻿using Org.BouncyCastle.Pkcs;
+using System.Security.Cryptography.X509Certificates;
+
+namespace TedaLibrary.Interface
+{
+    interface IDigitalSigUtil
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyStorePath">Path to keystore file</param>
+        /// <param name="keyStorePassword">Password use for open keystore file</param>
+        /// <returns>Pkcs12 Store</returns>
+        Pkcs12Store getKeyStore(string keyStorePath,string keyStorePassword);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>X509 Certificate</returns>
+        X509Certificate2 getX509Certificate2();
+    }
+}

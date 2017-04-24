@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Security.Cryptography.X509Certificates;
+using iTextSharp.text.pdf.security;
+
+namespace TedaLibrary.Object
+{
+    public class SignInformation
+    {
+        public string hashAlgorithm { get; set; }
+        public string reason { get; set; }
+        public string location { get; set; }
+        public int certifyLevel { get; set; }
+        public byte[] sigImg { get; set; }
+        public CryptoStandard sigType { get; set; }
+        public X509Certificate2 cert { get; set; }
+        public ICollection<Org.BouncyCastle.X509.X509Certificate> chain { get; set; }
+        public List<ICrlClient> crlList { get; set; }
+        public ITSAClient tsaClient { get; set; }
+    }
+}

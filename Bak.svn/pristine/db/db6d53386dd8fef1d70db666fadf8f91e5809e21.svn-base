@@ -1,0 +1,36 @@
+﻿using System.Collections.Generic;
+using iTextSharp.text;
+using iTextSharp.text.pdf.security;
+using Org.BouncyCastle.Crypto;
+
+namespace TedaLibrary
+{
+    class TedaObj
+    {
+        Rectangle location;
+        Font font;
+        private AsymmetricKeyParameter privateKey;
+        private ICollection<Org.BouncyCastle.X509.X509Certificate> chain;
+        public List<ICrlClient> crlList;
+        private IExternalSignature signature;
+        private bool tsa = false;
+        private string tsaUrl = "";
+        private string tsaUsername = "";
+        private string tsaPassword = "";
+
+        public void setTimestamp(string tsaUrl, string tsaUsername, string tsaPassword)
+        {
+            this.tsaUrl = tsaUrl;
+            this.tsaUsername = tsaUsername;
+            this.tsaPassword = tsaPassword;
+            this.tsa = true;
+        }
+
+        public void getCRLList()
+        {
+            this.crlList = new List<ICrlClient>();
+            ICrlClient crlOnline = new CrlClientOnline(this.chain);
+            this.crlList.Add(crlOnline);
+        }
+    }
+}

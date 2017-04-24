@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace TedaLibrary
+{
+    interface IPdfCreator
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path">Word file path</param>
+        /// <param name="outputPath">Path to save pdf file</param>
+        /// <returns>Pdf in byte array</returns>
+        void Word2Pdf(string path,string outputPath);
+        //byte[] Excel2Pdf(byte[] pdf);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xmlPath">Path to xml file</param>
+        /// <param name="xslPath">Path to xsl file</param>
+        /// <returns>Pdf in byte array</returns>
+        byte[] ZUGFeRD2Pdf(string xmlPath,string xslPath);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xmlPath">Path to xml file</param>
+        /// <param name="xslPath">Path to xsl file</param>
+        /// <param name="cssPath">Path to css file</param>
+        /// <param name="fontPath">Path to font file or folder</param>
+        /// <returns>Pdf in byte array</returns>
+        byte[] ZUGFeRD2Pdf(string xmlPath, string xslPath,string cssPath, string fontPath);
+        //byte[] ZUGFeRD2Pdf(byte[] xml,byte[] pdf,string xslPath);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pdfFilePath">Path to Pdf file</param>
+        /// <returns>Pdf/A in byte array</returns>
+        byte[] Pdf2PdfA(string pdfFilePath);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pdfFilePath">Path to Pdf file</param>
+        /// <param name="xmlFileName">Name of xml file in attachment</param>
+        /// <param name="xmlFilePath">Path of xml file</param>
+        /// <returns>Pdf/A in byte array</returns>
+        byte[] Pdf2PdfA(string pdfFilePath,string xmlFileName,string xmlFilePath);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pdf">Pdf data in byte array</param>
+        /// <returns>Verified Pdf in byte array</returns>
+
+        byte[] Pdf2PdaA(byte[] pdf, List<KeyValuePair<string, string>> properties);
+
+        byte[] VerifyPdf(byte[] pdf);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pdfPath">Path to pdf file</param>
+        /// <returns>Verified Pdf in byte array</returns>
+        byte[] VerifyPdf(string pdfPath);
+    }
+}

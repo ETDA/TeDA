@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TedaLibrary.Interface;
+using System.IO;
+using Word = Microsoft.Office.Interop.Word;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.xml.xmp;
+using iTextSharp.xmp;
+using EAttachment;
+
+namespace TedaLibrary.Implement
+{
+    class PdfCreator : IPdfCreator
+    {
+        public byte[] Pdf2PdfA(string pdfFilePath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] Pdf2PdfA(string pdfFilePath, string xmlFileName, string xmlFilePath)
+        {
+            byte[] pdfFile = File.ReadAllBytes(pdfFilePath);
+            EDocument eDocument = new EDocument(pdfFile);
+            eDocument.AddDocInfoProperty("Title", "ETDA Recommendation PDF/A-3U Example");
+            eDocument.AddDocInfoProperty("Author", "Author 1");
+            eDocument.AddDocInfoProperty("Author", "Author 2");
+            eDocument.AddDocInfoProperty("Subject", "Example Document");
+            eDocument.AddDocInfoProperty("Keywords", "ETDA Recommendation Basic Level Document");
+            eDocument.AddAttachment(xmlFilePath, xmlFileName, "Text/XML", AttachmentType.ALTERNATIVE, "Document Content in XML format");
+            byte[] pdfAdocument = eDocument.generatePDFA3Document();
+            //File.WriteAllBytes("D:\\PDFA.pdf", pdfAdocument);
+            return pdfAdocument;
+        }
+
+        private PdfAWriter CreatePDFAInstance(Document targetDocument, PdfReader originalDocument, Stream os)
+        {
+            PdfAWriter writer = PdfAWriter.GetInstance(targetDocument, os, PdfAConformanceLevel.PDF_A_3U);
+            writer.CreateXmpMetadata();
+
+            if (!targetDocument.IsOpen())
+                targetDocument.Open();
+
+            PdfContentByte cb = writer.DirectContent; // Holds the PDF data	
+            PdfImportedPage page;
+            int pageCount = originalDocument.NumberOfPages;
+            for (int i = 0; i < pageCount; i++)
+            {
+                targetDocument.NewPage();
+                page = writer.GetImportedPage(originalDocument, i + 1);
+                cb.AddTemplate(page, 0, 0);
+            }
+            return writer;
+        }
+
+        private PdfFileSpecification EmbeddedAttachment(String filePath, String fileName, String mimeType,
+            PdfName afRelationship, PdfAWriter writer, String description)
+        {
+            PdfDictionary parameters = new PdfDictionary();
+            parameters.Put(PdfName.MODDATE, new PdfDate(File.GetLastWriteTime(filePath)));
+            PdfFileSpecification fileSpec = PdfFileSpecification.FileEmbedded(writer, filePath, fileName, null, mimeType,
+                    parameters, 0);
+            fileSpec.Put(new PdfName("AFRelationship"), afRelationship);
+            writer.AddFileAttachment(description, fileSpec);
+            return fileSpec;
+        }
+
+        public byte[] VerifyPdf(string pdfPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] VerifyPdf(byte[] pdf)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Word2Pdf(string path,string outputPath)
+        {
+            Word.Application wordApp = new Word.Application();
+            Word.Document wordDocument = wordApp.Documents.Open(path);
+            wordDocument.ExportAsFixedFormat(outputPath, Word.WdExportFormat.wdExportFormatPDF);
+            wordDocument.Close();
+        }
+
+        public byte[] ZUGFeRD2Pdf(string xmlPath, string xslPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte[] ZUGFeRD2Pdf(string xmlPath, string xslPath, string cssPath, string fontPath)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

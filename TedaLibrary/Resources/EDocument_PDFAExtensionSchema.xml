@@ -1,0 +1,55 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<rdf:Description rdf:about=""
+		xmlns:pdfaExtension="http://www.aiim.org/pdfa/ns/extension/"
+		xmlns:pdfaSchema="http://www.aiim.org/pdfa/ns/schema#"
+		xmlns:pdfaProperty="http://www.aiim.org/pdfa/ns/property#">
+		<pdfaExtension:schemas>
+			<rdf:Bag>
+				<rdf:li rdf:parseType="Resource">
+					<pdfaSchema:schema>Electronic Document PDFA Extension Schema
+					</pdfaSchema:schema>
+					<pdfaSchema:namespaceURI>
+            urn:etda:pdfa:ElectronicDocument:1p0:standard#
+          </pdfaSchema:namespaceURI>
+					<pdfaSchema:prefix>ed</pdfaSchema:prefix>
+					<pdfaSchema:property>
+						<rdf:Seq>
+							<rdf:li rdf:parseType="Resource">
+								<pdfaProperty:name>DocumentOID</pdfaProperty:name>
+								<pdfaProperty:valueType>Text</pdfaProperty:valueType>
+								<pdfaProperty:category>external</pdfaProperty:category>
+								<pdfaProperty:description>OID of Exchange Document Associated
+									File
+								</pdfaProperty:description>
+							</rdf:li>
+							<rdf:li rdf:parseType="Resource">
+								<pdfaProperty:name>DocumentReferenceID</pdfaProperty:name>
+								<pdfaProperty:valueType>Text</pdfaProperty:valueType>
+								<pdfaProperty:category>internal</pdfaProperty:category>
+								<pdfaProperty:description>Document Identification from
+									document's
+									author
+								</pdfaProperty:description>
+							</rdf:li>
+							<rdf:li rdf:parseType="Resource">
+								<pdfaProperty:name>DocumentVersion</pdfaProperty:name>
+								<pdfaProperty:valueType>Text</pdfaProperty:valueType>
+								<pdfaProperty:category>external</pdfaProperty:category>
+								<pdfaProperty:description>Version of document
+								</pdfaProperty:description>
+							</rdf:li>
+							<rdf:li rdf:parseType="Resource">
+								<pdfaProperty:name>DocumentFileName</pdfaProperty:name>
+								<pdfaProperty:valueType>Text</pdfaProperty:valueType>
+								<pdfaProperty:category>external</pdfaProperty:category>
+								<pdfaProperty:description>File name of Exchange Document
+									Associated File
+								</pdfaProperty:description>
+							</rdf:li>
+						</rdf:Seq>
+					</pdfaSchema:property>
+				</rdf:li>
+			</rdf:Bag>
+		</pdfaExtension:schemas>
+	</rdf:Description>
+</rdf:RDF>

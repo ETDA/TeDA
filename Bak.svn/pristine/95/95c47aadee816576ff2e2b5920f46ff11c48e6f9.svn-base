@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Org.BouncyCastle.Pkcs;
+using System.Security.Cryptography.X509Certificates;
+
+namespace TedaLibrary.Interface
+{
+    interface IDigitalSigUtil
+    {
+        Pkcs12Store getKeyStore(string keyStorePath,string keyStorePassword);
+        X509Store getKeyStore();
+    }
+}
